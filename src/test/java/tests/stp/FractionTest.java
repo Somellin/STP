@@ -1,34 +1,97 @@
 package tests.stp;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import labs.stp.fraction.Fraction;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import labs.stp.fraction.exception.FractionNullDenominatorException;
+import labs.stp.fraction.exception.FractionStringException;
+import labs.stp.fraction.fmath.MathFraction;
 import org.junit.jupiter.api.*;
+
+import java.util.regex.Pattern;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class FractionTest {
-
+    private Fraction fracInt;
+    private Fraction fracStr;
+    private Fraction fracException;
 
     @BeforeAll
-    void init(){
-        System.out.println("Before all:");
+    void init() {
+        fracInt = new Fraction(3, 4);
+        fracStr = new Fraction("3/4");
+        fracException = new Fraction();
     }
 
     @Test
-    void constructorFractionIntTest(){
-        System.out.println("test 1:" + this);
-        Fraction f = new Fraction(4,3);
-        assertEquals(f, new Fraction(4, 3));
+    void fractionNullDenominatorExceptionTest() {
+        assertThrows(FractionNullDenominatorException.class, () -> {
+            fracException.exceptionController(0);
+        });
     }
 
     @Test
-    void constructorFractionStringTest(){
-        System.out.println("test 1:" + this);
-        Fraction f = new Fraction("4/3");
-        assertEquals(f, new Fraction(4, 3));
+    void fractionStringExceptionTest() {
+        assertThrows(FractionStringException.class, () -> {
+            fracException.exceptionController(1);
+        });
     }
 
+    @Test
+    void constructorFractionIntTest() {
+        assertEquals(fracInt, new Fraction(3, 4));
+    }
 
+    @Test
+    void constructorFractionStringTest() {
+        assertEquals(fracStr, new Fraction(3, 4));
+    }
+
+    @Test
+    void reductionTest() {
+        Fraction f = new Fraction(10, 20);
+        f.reduction();
+        assertEquals(f, new Fraction(1, 2));
+    }
+
+    @Test
+    void generalFormTest() {
+        Fraction f = new Fraction(9, -3);
+        f.generalForm();
+        assertEquals(f, new Fraction(-9, 3));
+    }
+
+    @Test
+    void getNumeratorIntTest() {
+        Object expect = fracInt.getNumerator();
+        assertTrue(expect instanceof Integer);
+    }
+
+    @Test
+    void getNumeratorStringTest() {
+        Object expect = fracInt.getNumeratorStr();
+        assertTrue(expect instanceof String);
+    }
+
+    @Test
+    void getDenominatorIntTest() {
+        Object expect = fracInt.getDenominator();
+        assertTrue(expect instanceof Integer);
+    }
+
+    @Test
+    void getDenominatorStringTest() {
+        Object expect = fracInt.getDenominatorStr();
+        assertTrue(expect instanceof String);
+    }
+
+    @Test
+    void fractionCloneTest() {
+        Fraction expect = fracInt.clone();
+        expect.setNumerator(5);
+        assertNotEquals(expect, fracInt);
+    }
 
 }

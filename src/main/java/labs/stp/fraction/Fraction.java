@@ -58,7 +58,8 @@ public class Fraction implements Cloneable {
                     continue;
                 }
                 if (!Character.isDigit(c))
-                    throw new FractionStringException();
+                    exceptionController(1);
+//                    throw new FractionStringException();
                 if (k == 0) {
                     num += Integer.parseInt(String.valueOf(c));
                     num *= 10;
@@ -77,11 +78,20 @@ public class Fraction implements Cloneable {
             this.denominator = denom;
 
             if (this.denominator == 0)
-                throw new FractionNullDenominatorException();
+                exceptionController(0);
+//                throw new FractionNullDenominatorException();
 
         } catch (FractionNullDenominatorException | FractionStringException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void setNumerator(int numerator) {
+        this.numerator = numerator;
+    }
+
+    public void setDenominator(int denominator){
+        this.denominator = denominator;
     }
 
     /**
@@ -203,4 +213,11 @@ public class Fraction implements Cloneable {
     public int hashCode() {
         return Objects.hash(numerator, denominator);
     }
+
+    public String exceptionController(int k) throws FractionNullDenominatorException, FractionStringException {
+        if (k == 0)
+            throw new FractionNullDenominatorException();
+        else throw new FractionStringException();
+    }
+
 }

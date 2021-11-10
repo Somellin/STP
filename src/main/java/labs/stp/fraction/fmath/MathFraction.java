@@ -15,10 +15,12 @@ public final class MathFraction {
      * @return объект дроби возвращает результат сложения
      */
     public static Fraction add(Fraction f1, Fraction f2) {
-        return new Fraction(
+        Fraction f = new Fraction(
                 (f1.getNumerator() * f2.getDenominator()) +
                         (f2.getNumerator() * f1.getDenominator()),
                 f1.getDenominator() * f2.getDenominator());
+        f.reduction();
+        return f;
     }
 
     /**
@@ -31,9 +33,11 @@ public final class MathFraction {
      * @return объект дроби возвращает результат умножения
      */
     public static Fraction multiply(Fraction f1, Fraction f2) {
-        return new Fraction(
+        Fraction f = new Fraction(
                 f1.getNumerator() * f2.getNumerator(),
                 f1.getDenominator() * f2.getDenominator());
+        f.reduction();
+        return f;
     }
 
     /**
@@ -49,10 +53,13 @@ public final class MathFraction {
      * @return объект дроби возвращает результат вычитания
      */
     public static Fraction subtract(Fraction f1, Fraction f2) {
-        return new Fraction(
+        Fraction f = new Fraction(
                 (f1.getNumerator() * f2.getDenominator()) -
                         (f2.getNumerator() * f1.getDenominator()),
                 f1.getDenominator() * f2.getDenominator());
+        f.reduction();
+        return f;
+
     }
 
     /**
@@ -65,9 +72,11 @@ public final class MathFraction {
      * @return объект дроби возвращает результат деления
      */
     public static Fraction divide(Fraction f1, Fraction f2) {
-        return new Fraction(
+        Fraction f = new Fraction(
                 f1.getNumerator() * f2.getDenominator(),
                 f2.getNumerator() * f1.getDenominator());
+        f.reduction();
+        return f;
     }
 
     /**
@@ -79,9 +88,11 @@ public final class MathFraction {
      * @return объект дроби возвращает результат квадрата дроби
      */
     public static Fraction square(Fraction f1) {
-        return new Fraction(
+        Fraction f = new Fraction(
                 f1.getNumerator() * f1.getNumerator(),
                 f1.getDenominator() * f1.getDenominator());
+        f.reduction();
+        return f;
     }
 
     /**
