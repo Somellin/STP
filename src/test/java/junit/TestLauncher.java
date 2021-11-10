@@ -7,6 +7,7 @@ import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import tests.stp.FractionTest;
+import tests.stp.MathFractionTest;
 
 import java.io.PrintWriter;
 
@@ -17,7 +18,8 @@ public class TestLauncher {
 
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
-                .selectors(DiscoverySelectors.selectDirectory("junit.tests.stp"))
+                .selectors(DiscoverySelectors.selectClass(FractionTest.class))
+                .selectors(DiscoverySelectors.selectClass(MathFractionTest.class))
                 .build();
         LauncherFactory.create()
                 .execute(request,summaryGeneratingListener);
