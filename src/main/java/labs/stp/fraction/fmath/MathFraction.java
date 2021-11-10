@@ -104,7 +104,7 @@ public final class MathFraction {
      * @return - Простая дробь
      */
     public static Fraction minus(Fraction f1) {
-        var z = new Fraction(0, 1);
+        Fraction z = new Fraction(0, 1);
         return subtract(z, f1);
     }
 
