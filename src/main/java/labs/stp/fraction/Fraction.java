@@ -90,12 +90,13 @@ public class Fraction implements Cloneable {
         this.numerator = numerator;
     }
 
-    public void setDenominator(int denominator){
+    public void setDenominator(int denominator) {
         this.denominator = denominator;
     }
 
     /**
-     * метод сокращения дроби
+     * Метод сокращения дроби чрез нахождение
+     * наибольшего общего делителя
      */
     public void reduction() {
         int gcd;

@@ -1,16 +1,12 @@
 package tests.stp;
 
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import labs.stp.fraction.Fraction;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import labs.stp.fraction.exception.FractionNullDenominatorException;
 import labs.stp.fraction.exception.FractionStringException;
-import labs.stp.fraction.fmath.MathFraction;
 import org.junit.jupiter.api.*;
-
-import java.util.regex.Pattern;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class FractionTest {
